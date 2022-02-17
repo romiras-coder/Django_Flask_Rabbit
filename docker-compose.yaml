@@ -41,5 +41,5 @@ services:
     build:
       context: all_services/PyApp/
       dockerfile: Dockerfile
-#    depends_on:
-#      - rabbitmq
+    depends_on:
+      - rabbitmq
