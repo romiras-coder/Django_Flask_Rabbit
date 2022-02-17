@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  django_app:
+    container_name: django_app
+    build:
+      context: all_services/Django_shop/
+      dockerfile: Dockerfile
+    ports:
+      # HTTP management UI
+      - "8000:8000"
+
+  flask_app:
+    container_name: flask_app
+    build:
+      context: all_services/Flask/
+      dockerfile: Dockerfile
+    depends_on:
+      - django_app
+    ports:
+      # HTTP management UI
+      - "5000:5000"
+
+  rabbitmq:
+    container_name: "rabbitmq"
+    image: rabbitmq:3.8-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=myuser
+      - RABBITMQ_DEFAULT_PASS=mypassword
+    depends_on:
+      - django_app
+      - flask_app
+    ports:
+      # AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+
+  py_app:
+    container_name: py_app
+    build:
+      context: all_services/PyApp/
+      dockerfile: Dockerfile
+#    depends_on:
+#      - rabbitmq
