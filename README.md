@@ -24,5 +24,6 @@
 
 #### Сервисы
     http://127.0.0.1:8000 - Django_shop
+     http://127.0.0.1:8000/admin - пользователь: admin пароль: 1
     http://127.0.0.1:5000 - Flask
-    http://127.0.0.1:15672 - Rabbitmq_manager
+    http://127.0.0.1:15672 - пользователь: myuser пароль: mypassword
